@@ -1,0 +1,51 @@
+main {
+  width: auto;
+  height: auto;
+}
+
+footer {
+  background-color: #0288D1;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  height: 50px;
+  width: 100%;
+  position: absolute;
+}
+
+#howToUse {
+  background-color: #fff;
+  color: black;
+  margin: 2% 10%;
+  padding: 2% 2%;
+  box-shadow: 0 8px 10px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+#filtersPage {
+  background-color: #fff;
+  color: black;
+  margin: 5% 10%;
+  padding: 2% 2%;
+  box-shadow: 0 8px 10px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+#permitTypeForm {
+  background-color: #B3E5FC;
+  padding: 3px 3px;
+}
+
+#categoryTypeForm {
+  background-color: #EBEFF1;
+  padding: 3px 3px;
+}
+
+#permitStatusForm {
+  background-color: #B3E5FC;
+  padding: 3px 3px;
+}
+
+#mapBox {
+  margin: 5% 10%;
+  padding: 25% 0;
+  box-shadow: 0 8px 10px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}

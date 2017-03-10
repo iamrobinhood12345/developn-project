@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>devlopN</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/vendor/styles/reset.css">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/layout.css">
+    <link rel="stylesheet" href="/styles/modules.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans|Roboto">
+    <link rel="icon" type="image/x-icon" href="/assets/logo.png">
+    <section>
+      <script id="property-template" type="text/x-handlebars-template">
+          <header>
+            <div id="row">Address: {{address}}<br></div>
+            Applicant Name: {{applicant_name}}<br>
+            <div id="row">Description: {{description}}<br></div>
+            Category: {{category}}<br>
+            <div id="row">Action Type: {{action_type}}<br></div>
+            Permit Number: {{application_permit_number}}<br>
+            <div id="row">Permit Type: {{permit_type}}<br></div>
+            Value: ${{value}}<br>
+            <div id="row">Application Date: {{application_date}}<br></div>
+            Issue Date: {{issue_date}}<br>
+            <div id="row">Expiration Date: {{expiration_date}}<br></div>
+            Permit and Complaints URL: <address><a href="{{permit_and_complaint_status_url}}" target="_blank">{{complaint}}</a></address>
+          </header>
+      </script>
+    </section>
+  </head>
+  <body>
+    <header id="mainHeader">
+        <a href="/"><img src="/assets/logo.png" id="logo"></a>
+        <h1>developN Seattle</h1>
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+        </nav>
+    </header>
+    <main>
+      <section id="filtersPage">
+        <section id="howToUse">
+          <h3>What's developN ?</h3>
+          <p>
+            To view construction permits in Seattle, filter results using the form fields below and hit Submit!
+          </p>
+        </section>
+        <article>
+          <h3>Permit Type</h3>
+          <form id="permitTypeForm">
+            <input type="radio" name="permitType" value="permit_type%20=%20%27Construction%27"> Construction<br>
+            <input type="radio" name="permitType" value="permit_type%20=%20%27Demolition%27"> Demolition<br>
+            <input type="radio" name="permitType" value="permit_type%20=%20%27Site%20Development%27"> Site Development<br>
+          </form><br>
+          <h3>Category Type</h3>
+          <form id="categoryTypeForm">
+            <input type="radio" name="categoryType" value="category%20=%20%27COMMERCIAL%27"> Commercial<br>
+            <input type="radio" name="categoryType" value="category%20=%20%27INDUSTRIAL%27"> Industrial<br>
+            <input type="radio" name="categoryType" value="category%20=%20%27INSTITUTIONAL%27"> Institutional<br>
+            <input type="radio" name="categoryType" value="category%20=%20%27MULTIFAMILY%27"> Multifamily<br>
+            <input type="radio" name="categoryType" value="category%20=%20%27SINGLE%20FAMILY%20%2f%20DUPLEX%27"> Single Family/Duplex<br>
+          </form><br>
+          <h3>Permit Status</h3>
+          <form id="permitStatusForm">
+            <input type="radio" name="permitStatus" value="status%20=%20%27Application%20Accepted%27"> Application Accepted<br>
+            <input type="radio" name="permitStatus" value="status%20=%20%27Permit%20Issued%27"> Permit Issued<br>
+            <input type="radio" name="permitStatus" value="status%20=%20%27Reviews%20Completed%27"> Reviews Completed<br>
+            <input type="radio" name="permitStatus" value="status%20=%20%27AP%20Closed%27"> Application Closed<br>
+          </form><br>
+          <select id="dateUpperBound" class="select-year">
+            <option value="">select upper bound for date</option>
+            <option value="application_date%20<%20%272016-01-01T00:00:00%27" data-year="2016">2016</option>
+            <option value="application_date%20<%20%272015-01-01T00:00:00%27" data-year="2015">2015</option>
+            <option value="application_date%20<%20%272014-01-01T00:00:00%27" data-year="2014">2014</option>
+            <option value="application_date%20<%20%272013-01-01T00:00:00%27" data-year="2013">2013</option>
+            <option value="application_date%20<%20%272012-01-01T00:00:00%27" data-year="2012">2012</option>
+          </select>
+          <select id="dateLowerBound" class="select-year">
+            <option value="">select lower bound for date</option>
+            <option value="application_date%20>%20%272016-01-01T00:00:00%27" data-year="2016">2016</option>
+            <option value="application_date%20>%20%272015-01-01T00:00:00%27" data-year="2015">2015</option>
+            <option value="application_date%20>%20%272014-01-01T00:00:00%27" data-year="2014">2014</option>
+            <option value="application_date%20>%20%272013-01-01T00:00:00%27" data-year="2013">2013</option>
+            <option value="application_date%20>%20%272012-01-01T00:00:00%27" data-year="2012">2012</option>
+            <option value="application_date%20>%20%272011-01-01T00:00:00%27" data-year="2011">2011</option>
+          </select>
+          <select id="valueUpperBound" class="select-value">
+            <option value="">select upper bound for value</option>
+            <option value="value%20<%20%27200000000%27" data-value="200000000">$200,000,000</option>
+            <option value="value%20<%20%27100000000%27" data-value="100000000">$100,000,000</option>
+            <option value="value%20<%20%2750000000%27" data-value="50000000">$50,000,000</option>
+            <option value="value%20<%20%2710000000%27" data-value="10000000">$10,000,000</option>
+            <option value="value%20<%20%275000000%27" data-value="5000000">$5,000,000</option>
+            <option value="value%20<%20%271000000%27" data-value="1000000">$1,000,000</option>
+            <option value="value%20<%20%27500000%27" data-value="500000">$500,000</option>
+            <option value="value%20<%20%27100000%27" data-value="100000">$100,000</option>
+            <option value="value%20<%20%2750000%27" data-value="50000">$50,000</option>
+          </select>
+          <select id="valueLowerBound" class="select-value">
+            <option value="">select lower bound for value</option>
+            <option value="value%20>%20%27200000000%27" data-value="200000000">$200,000,000</option>
+            <option value="value%20>%20%27100000000%27" data-value="100000000">$100,000,000</option>
+            <option value="value%20>%20%2750000000%27" data-value="50000000">$50,000,000</option>
+            <option value="value%20>%20%2710000000%27" data-value="10000000">$10,000,000</option>
+            <option value="value%20>%20%275000000%27" data-value="5000000">$5,000,000</option>
+            <option value="value%20>%20%271000000%27" data-value="1000000">$1,000,000</option>
+            <option value="value%20>%20%27500000%27" data-value="500000">$500,000</option>
+            <option value="value%20>%20%27100000%27" data-value="100000">$100,000</option>
+            <option value="value%20>%20%2750000%27" data-value="50000">$50,000</option>
+          </select>
+          <form style="display: inline"><a href="/map"><br><br>
+            <input type="button" value="Submit" id="submitButton"></a>
+          </form>
+        </article>
+      </section>
+      <section id="resultsPage">
+        <article id="mapWindow">
+          <div id="mapBox"></div>
+        </article>
+        <article id="infoBox">
+        </article>
+      </section>
+      <section id="instructionsPage">
+        <h1 style="color: Black">Instructions</h1><br><br><br>
+        <h3><b>Filter Descriptions</b></h3><br>
+        <p><u>Permit Types</u></p><br>
+        <p>Construction - A new structure</p><br>
+        <p>Demolition - Destroying an existing structure</p><br>
+        <p>Site Development - Property improvement without a new structure</p><br>
+        <br>
+        <p><u>Category Type</u></p><br>
+        <p>The general use category the permit falls into.</p><br>
+        <p>Commercial - Business or mixed use housing/commercial construction</p><br>
+        <p>Industrial – Heavy industry related construction</p><br>
+        <p>Institutional – Related to institutions such as schools or hospitals</p><br>
+        <p>Multifamily – Buildings which house multiple living units</p><br>
+        <p>Single Family/Duplex – Buildings with only one or two living units</p><br>
+        <br>
+        <p><u>Permit Status</u></p><br>
+        <p>How far along is the permitting process?</p><br>
+        <p>Application Accepted – The city has the application, but has not completed its review</p><br>
+        <p>Permit Issued – The city has issued a permit</p><br>
+        <p>Reviews Completed – The city has completed its review but has not issued a permit</p><br>
+        <p>Application Closed – The application has been withdrawn, rejected, or is otherwise out of consideration for permitting.</p><br>
+        <br>
+        <h3><b>Retrieved Data</b></h3><br>
+        <p>Address – The relevant property’s address<br><br>
+        Applicant Name – The person who filed the application<br><br>
+        Description – A brief description of the the proposed work. Long descriptions are truncated<br><br>
+        Category – See category type above<br><br>
+        Action Type – Is the application for a new building, changes to an existing building, or a demolition<br><br>
+        Permit Number – The unique record number the city assigns <br><br>
+        Permit Type – See permit type above <br><br>
+        Value – Estimated worth of the finished construction based on fair market value. <br><br>
+        Application Date – The date the application was filed <br><br>
+        Issue Date – The date a permit was issued, if any <br><br>
+        Expiration Date - The date an issued permit expires. Work should be completed <br><br>
+        Permit and Complaints URL – A link to the City’s full record of the application</p>
+      </section>
+    </main>
+    <footer>
+      <h2>&copy; developN 2016</h2>
+    </footer>
+  </body>
+  <script src="vendor/page.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
+  <script src="vendor/handlebars-v4.0.5.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQGQs5-aAUxm7SPyVekerE3WxjRKcjBhs&libraries=places"></script>
+  <script src="vendor/html5sql.js"></script>
+  <script src="vendor/webdb.js"></script>
+  <script type="text/javascript" src="scripts/models/permitModel.js"></script>
+  <script type="text/javascript" src="scripts/controllers/requestController.js"></script>
+  <script type="text/javascript" src="scripts/views/displayMap.js"></script>
+  <script type="text/javascript" src="scripts/controllers/filterController.js"></script>
+  <script type="text/javascript" src="scripts/controllers/mapController.js"></script>
+  <script type="text/javascript" src="scripts/controllers/aboutController.js"></script>
+  <script type="text/javascript" src="scripts/controllers/routes.js"></script>
+</html>
